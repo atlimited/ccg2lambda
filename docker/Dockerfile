@@ -25,7 +25,6 @@ RUN python scripts/run_tests.py
 RUN apt-get -y install coq
 RUN coqc coqlib.v
 
-
 WORKDIR /opt/ccg2lambda
 RUN apt-get install wget
 RUN ./ja/download_dependencies.sh
@@ -53,4 +52,8 @@ RUN echo 'jigg:/opt/ccg2lambda/ja/jigg-v-0.4' > /opt/ccg2lambda/ja/parser_locati
 RUN echo 'depccg:/opt/depccg' >> /opt/ccg2lambda/ja/parser_location_ja.txt
 
 WORKDIR /opt/ccg2lambda
+
+RUN cp ja/coqlib_ja.v coqlib.v
+RUN coqc coqlib.v
+RUN cp ja/tactics_coq_ja.txt tactics_coq.txt
 RUN ./ja/rte_ja_mp.sh ja/sample_ja.txt ja/semantic_templates_ja_emnlp2016.yaml
